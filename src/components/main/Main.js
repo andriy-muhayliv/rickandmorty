@@ -16,19 +16,28 @@ const Main = () => {
   const filter = useSelector((data) => data.filterData);
   const dispatch = useDispatch();
   const [copyArr, setCopyArr] = useState(filter);
-  const [inputText, setInputText] = useState();
+  const [inputText, setInputText] = useState("");
   useEffect(() => {
     setCopyArr(data);
   }, [data]);
-  useEffect(() => {
-    setCopyArr(filter ? filter : data);
-  }, [inputText, filter]);
 
   const search = (inputText) => {
     const value = inputText.toLowerCase().split(" ").join("");
-    dispatch({ type: "FILTER_DATA", value, data });
+    const search = data?.filter((item) => {
+      const successSearch = item?.name
+        .trim()
+        .toLowerCase()
+        .split(" ")
+        .join("")
+        .search(value);
+      if (successSearch >= 0) {
+        return item;
+      } else if (!value.length) {
+        return data.slice();
+      }
+    });
+    setCopyArr(search);
   };
-
   return (
     <>
       <Stack spacing={2} sx={{ width: 300 }}>

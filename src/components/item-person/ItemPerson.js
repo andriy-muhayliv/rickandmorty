@@ -10,15 +10,12 @@ const ItemPerson = ({ item }) => {
   const [like, setLike] = useState(false);
   const [local, setLocal] = useState(JSON.parse(localStorage.getItem(image)));
   useEffect(() => {
-    try {
-      setLocal(JSON.parse(localStorage.getItem(image)));
-    } catch (err) {}
     if (local) {
       setLike(true);
     } else {
       setLike(false);
     }
-  }, [, item, name]);
+  }, [item, name]);
 
   useEffect(() => {
     dispatch({

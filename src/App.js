@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Container maxWidth="xl">
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" index element={<Main />} />
           <Route path="/:slug" element={<Person />} />
         </Routes>
       </Container>
